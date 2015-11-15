@@ -51,7 +51,7 @@
     <script src="gcode-viewer/renderer.js"></script>
     <script src="gcode-viewer/ui.js"></script>
 
-	
+
 <link rel="stylesheet" href="bootstrap.min.css" />
 <link rel="stylesheet" href="bootstrap-theme.min.css" />
 <link rel="stylesheet" href="bootstrap-notify.css" />
@@ -66,9 +66,9 @@
 	padding-top: 40px;
     padding-bottom: 40px;
     margin-right: 1%;
-	z-index: 1; 
-	position: absolute; 
-	left: 0;  
+	z-index: 1;
+	position: absolute;
+	left: 0;
 	top:  0;
 }
 
@@ -168,8 +168,8 @@
 <hr style="clear: both;" />
  <div class='notifications bottom-left'></div>
 
- 			<span class="btn btn-default btn-file" onclick="controls.reset();">Reset 3D View</span>	
-            
+ 			<span class="btn btn-default btn-file" onclick="controls.reset();">Reset 3D View</span>
+
  <!-- Left Column ^^^ -->
 
 
@@ -222,7 +222,7 @@ Send
 <a id="wcLink" target="_blank" href="#">Webcam</a>
 </div>
 
-            
+
 <div id="renderArea"></div>
 <!-- END CENTER COLUMN -->
 
@@ -243,7 +243,7 @@ Send
       <table>
 	  <tr>
 	  <td>
-	  
+
 					  <!-- Pronterface Jog Widget -->
 				  <svg width="320" height="260" xmlns="http://www.w3.org/2000/svg" version="1.1">
 
@@ -531,13 +531,13 @@ Send
 				</td>
 				<td>
 				<button type="button" class="btn btn-default" style="margin-bottom:10px; width: 100%;" id="motorsOff">Motors Off</button>
-				
+
 				<div class="btn-group btn-group" role="group" aria-label="Fan Control"  style="margin-bottom:10px; width: 100%;">
-					<button type="button" class="btn btn-secondary btn-success"  style="width: 50%" id="fanOn">Fan On</button>
-					<button type="button" class="btn btn-secondary btn-danger"  style="width: 50%" id="fanOff">Fan Off</button>
+					<button type="button" class="btn btn-secondary btn-success"  style="width: 50%" id="laserOn">Laser On</button>
+					<button type="button" class="btn btn-secondary btn-danger"  style="width: 50%" id="laserOff">Laser Off</button>
 					</div>
 				<br>
-				
+
 				<div class="input-group" style="margin-bottom:10px; width: 100%;">
 				  <span class="input-group-addon"  style="width: 200px;">Feedrate</span>
 				  <div class="input-group spinner">
@@ -550,12 +550,12 @@ Send
 				</div>
 				</td>
 				</table>
-	  
-	  
+
+
       </div>
       <div class="modal-footer">
         <!--button type="button" class="btn btn-default" data-dismiss="modal">Close</button // Commented out - using $('#sliceModal').modal('toggle'); in main.js to close once sliced-->
-        
+
       </div>
     </div>
   </div>
@@ -563,7 +563,7 @@ Send
 
 
 <script>
-$(document).ready(function(){ 
+$(document).ready(function(){
 	$('#fileStatus').html('File Loaded: '+fileInputGcode.value+' as GCODE');
 	$('#mainStatus').html('Status: Example only: Please Load proper file for cutting...');
 	$('#sendToLaser').addClass('disabled');

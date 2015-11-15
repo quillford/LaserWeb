@@ -66,7 +66,7 @@ $(document).ready(function() {
 	// Enable the buttons once a port is selected
 	$("#choosePort").change(function () {
         $('#openMachineControl').removeClass('disabled');
-		$('#sendCommand').removeClass('disabled');	
+		$('#sendCommand').removeClass('disabled');
     });
 
 	// config options from server
@@ -83,7 +83,7 @@ $(document).ready(function() {
 			$('#wcLink').attr('href', webroot+':'+data.webcamPort+'/javascript_simple.html');
 			$('#webcam').show();
 		}
-	
+
 	});
 
 	socket.on('qStatus', function (data) {
@@ -111,7 +111,7 @@ $(document).ready(function() {
 		$('#console').scrollTop($("#console")[0].scrollHeight - $("#console").height());
 	});
 
-	
+
 	$('#choosePort').on('change', function() {
 		// select port
 		socket.emit('usePort', $('#choosePort').val());
@@ -141,7 +141,7 @@ $(document).ready(function() {
 		socket.emit('gcodeLine', { line: 'G91\nG0 X-0.1 F'+$('#jogSpeed').val()+'\nG90' });
 	});
 
-	
+
 	$('#xM').on('click', function() {
 		socket.emit('gcodeLine', { line: 'G91\nG0 X-1 F'+$('#jogSpeed').val()+'\nG90' });
 	});
@@ -153,7 +153,7 @@ $(document).ready(function() {
 	$('#xMCen').on('click', function() {
 		socket.emit('gcodeLine', { line: 'G91\nG0 X-100 F'+$('#jogSpeed').val()+'\nG90' });
 	});
-	
+
 	$('#xP01').on('click', function() {
 		socket.emit('gcodeLine', { line: 'G91\nG0 X0.1 F'+$('#jogSpeed').val()+'\nG90' });
 	});
@@ -173,7 +173,7 @@ $(document).ready(function() {
 	$('#yP01').on('click', function() {
 		socket.emit('gcodeLine', { line: 'G91\nG0 Y0.1 F'+$('#jogSpeed').val()+'\nG90' });
 	});
-	
+
 	$('#yP').on('click', function() {
 		socket.emit('gcodeLine', { line: 'G91\nG0 Y1 F'+$('#jogSpeed').val()+'\nG90' });
 	});
@@ -185,7 +185,7 @@ $(document).ready(function() {
 	$('#yPCen').on('click', function() {
 		socket.emit('gcodeLine', { line: 'G91\nG0 Y100 F'+$('#jogSpeed').val()+'\nG90' });
 	});
-	
+
 	$('#yM01').on('click', function() {
 		socket.emit('gcodeLine', { line: 'G91\nG0 Y-0.1 F'+$('#jogSpeed').val()+'\nG90' });
 	});
@@ -202,12 +202,12 @@ $(document).ready(function() {
 		socket.emit('gcodeLine', { line: 'G91\nG0 Y-100 F'+$('#jogSpeed').val()+'\nG90' });
 	});
 
-	
+
 	$('#zP01').on('click', function() {
 		socket.emit('gcodeLine', { line: 'G91\nG0 Z0.1 F'+$('#jogSpeed').val()+'\nG90' });
 	});
 
-	
+
 	$('#zP').on('click', function() {
 		socket.emit('gcodeLine', { line: 'G91\nG0 Z1 F'+$('#jogSpeed').val()+'\nG90' });
 	});
@@ -231,7 +231,7 @@ $(document).ready(function() {
 	$('#homeX').on('click', function() {
 		socket.emit('gcodeLine', { line: 'G28 X0' });
 	});
-	
+
 	$('#homeY').on('click', function() {
 		socket.emit('gcodeLine', { line: 'G28 Y0' });
 	});
@@ -256,7 +256,7 @@ $(document).ready(function() {
 			$('#clearQ').addClass('disabled');
 		}
 	});
-	
+
 	$('#openMachineControl').on('click', function() {
 		$('#machineControl').modal('toggle');
 	});
@@ -273,17 +273,17 @@ $(document).ready(function() {
 	$("#gcodepreview").change(function () {
 		openGCodeFromText();
         $('#openMachineControl').removeClass('disabled');
-		$('#sendCommand').removeClass('disabled');	
+		$('#sendCommand').removeClass('disabled');
 		$('#sendToLaser').removeClass('disabled');
     });
-	
+
 	$('#sendToLaser').on('click', function() {
 		$('#sendToLaser').addClass('disabled');
 		$('#mainStatus').html('Status: Printing');
 		socket.emit('gcodeLine', { line: $('#gcodepreview').val() });  //Works with Gcode pasted in #gcodepreview too (:
 		$('#gcodepreview').val('');
 	});
-	
+
 	$('#sendCommand').on('click', function() {
 
 		socket.emit('gcodeLine', { line: $('#command').val() });
@@ -291,18 +291,18 @@ $(document).ready(function() {
 	});
 
 	$('#motorsOff').on('click', function() {
-		socket.emit('gcodeLine', { line: 'M84' }); 
+		socket.emit('gcodeLine', { line: 'M84' });
 	});
 
-	$('#fanOn').on('click', function() {
-		socket.emit('gcodeLine', { line: 'M106' }); 
-	});
-	
-	$('#fanOff').on('click', function() {
-		socket.emit('gcodeLine', { line: 'M107' }); 
+	$('#laserOn').on('click', function() {
+		socket.emit('gcodeLine', { line: 'M3' });
 	});
 
-	
+	$('#laserOff').on('click', function() {
+		socket.emit('gcodeLine', { line: 'M5' });
+	});
+
+
 	$('#commmand').keyup(function(event){
 		if(event.keyCode == 13){
 			$('#sendCommand').click();
@@ -336,11 +336,11 @@ $(document).ready(function() {
 			reader.readAsText(fileInputGcode.files[0]);
 		});
 
-	
+
 	} else {
 		alert('your browser is too old to upload files, get the latest Chromium or Firefox');
 	}
-	
+
 	// Position
 	// data =  X:100.00 Y:110.00 Z:10.00 E:0.00
 	socket.on('posStatus', function(data) {
@@ -350,21 +350,21 @@ $(document).ready(function() {
 			data = data.replace(/Z/g,' ');
 			data = data.replace(/E/g,' ');
 			var posArray = data.split(/(\s+)/);
-			//console.log(posArray);   
-			//console.log('Xpos '+posArray[2]); 
-			//console.log('Ypos '+posArray[4]); 
-			//console.log('Zpos '+posArray[6]);  
-			//console.log('Epos '+posArray[8]); 
+			//console.log(posArray);
+			//console.log('Xpos '+posArray[2]);
+			//console.log('Ypos '+posArray[4]);
+			//console.log('Zpos '+posArray[6]);
+			//console.log('Epos '+posArray[8]);
 			$('#mX').html('X: '+posArray[2]);
 			$('#mY').html('Y: '+posArray[4]);
 			$('#mZ').html('Z: '+posArray[6]);
 			cylinder.position.x = posArray[2] - (laserxmax /2);
 			cylinder.position.y = posArray[4] - (laserymax /2);
 			cylinder.position.z = posArray[6] + 20;
-			
+
 	});
-	
-	
+
+
 	// Endstop
 	// data = echo:endstops hit:  Y:154.93
 	socket.on('endstopAlarm', function(data) {
@@ -378,12 +378,12 @@ $(document).ready(function() {
 				type: 'danger'
 			}).show(); // for the ones that aren't closable and don't fade out there is a .hide() function.
 	});
-	
+
 	// Unknown Command
 	//data = echo:Unknown command: "X26.0480 Y29.1405 R7.4125"   unknownGcode
 	socket.on('unknownGcode', function(data) {
 			//console.log("Unknown GCode");
-			var gcArray = data.split(/:/);   
+			var gcArray = data.split(/:/);
 			console.log(gcArray);  // ["echo", "Unknown command", " "X11.4089 Y29.4258 R1.9810""]
 			// NB MIGHT MAKE IT PAUSE WHEN THIS HAPPENS, A WRONG COMMAND MIGHT ANYWAY MEAN A RUINED JOB
 			$('.bottom-left').notify({
@@ -392,7 +392,7 @@ $(document).ready(function() {
 				type: 'warning'
 			}).show(); // for the ones that aren't closable and don't fade out there is a .hide() function.
 	});
-	
+
 	// temperature
 	// data = T:24.31 /0 @:0 B:24.31 /0 @:0
 	socket.on('tempStatus', function(data) {
